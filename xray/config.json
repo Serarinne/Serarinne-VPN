@@ -1,0 +1,205 @@
+{
+    "outbounds": [
+        {
+            "tag": "direct",
+            "protocol": "freedom",
+            "settings": {}
+        },
+        {
+            "tag": "block",
+            "protocol": "blackhole",
+            "settings": {}
+        }
+    ],
+    "routing": {
+        "domainStrategy": "AsIs",
+        "domainMatcher": "hybrid",
+        "rules": [
+            {
+                "domainMatcher": "hybrid",
+                "type": "field",
+                "domain": [
+                    "ext:geosite.dat:google",
+                    "ext:geosite.dat:facebook",
+                    "ext:geosite.dat:twitter",
+                    "ext:geosite.dat:telegram",
+                    "ext:geosite.dat:netflix",
+                    "ext:geosite.dat:category-games",
+                    "youtube.com",
+                    "netflix.com",
+                    "tiktok.com"
+                ],
+                "ip": [
+                    "ext:geoip.dat:private",
+                    "ext:geoip.dat:id"
+                ],
+                "inboundTag": [
+                    "user-connection"
+                ],
+                "protocol": [
+                    "http",
+                    "tls"
+                ],
+                "outboundTag": "direct"
+            },
+            {
+                "domainMatcher": "hybrid",
+                "type": "field",
+                "inboundTag": [
+                    "user-connection"
+                ],
+                "protocol": [
+                    "http",
+                    "tls"
+                ],
+                "outboundTag": "direct"
+            },
+            {
+                "type": "field",
+                "domain": [
+                    "ext:geosite.dat:category-ads-all"
+                ],
+                "outboundTag": "block"
+            },
+            {
+                "type": "field",
+                "protocol": [
+                    "bittorrent"
+                ],
+                "outboundTag": "block"
+            },
+            {
+                "domainMatcher": "hybrid",
+                "type": "field",
+                "inboundTag": [
+                    "api"
+                ],
+                "outboundTag": "api"
+            },
+            {
+                "type": "field",
+                "ip": [
+                    "0.0.0.0/8",
+                    "10.0.0.0/8",
+                    "100.64.0.0/10",
+                    "169.254.0.0/16",
+                    "172.16.0.0/12",
+                    "192.0.0.0/24",
+                    "192.0.2.0/24",
+                    "192.168.0.0/16",
+                    "198.18.0.0/15",
+                    "198.51.100.0/24",
+                    "203.0.113.0/24",
+                    "::1/128",
+                    "fc00::/7",
+                    "fe80::/10"
+                ],
+                "outboundTag": "block"
+            }
+        ]
+    },
+    "log": {
+        "access": "/root/serarinne/log/access-xray.log",
+        "error": "/root/serarinne/log/error-xray.log",
+        "loglevel": "info"
+    },
+    "inbounds": [
+        {
+            "tag": "api",
+            "listen": "127.0.0.1",
+            "port": 10085,
+            "protocol": "dokodemo-door",
+            "settings": {
+                "address": "127.0.0.1"
+            }
+        },
+        {
+            "tag": "user-connection",
+            "listen": "127.0.0.1",
+            "port": "23656",
+            "protocol": "trojan",
+            "settings": {
+                "clients": [
+                    {
+                        "password": "60d9785f-0e59-4988-aee1-322351b4de7f",
+                        "email": "Admin",
+                        "level": 0
+                    }
+#USER-ACCOUNT
+                ],
+                "decryption": "none"
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "none",
+                "wsSettings": {
+                    "path": "/trojan",
+                    "host": ""
+                },
+                "quicSettings": {},
+                "sockopt": {
+                    "mark": 0,
+                    "tcpFastOpen": true
+                }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls"
+                ]
+            }
+        }
+    ],
+    "api": {
+        "tag": "api",
+        "services": [
+            "HandlerService",
+            "LoggerService",
+            "StatsService"
+        ]
+    },
+    "policy": {
+        "levels": {
+            "0": {
+                "handshake": 2,
+                "connIdle": 10,
+                "uplinkOnly": 2,
+                "downlinkOnly": 2,
+                "statsUserDownlink": true,
+                "statsUserUplink": true,
+                "statsUserOnline": true,
+                "bufferSize": 0
+            }
+        },
+        "system": {
+            "statsInboundUplink": true,
+            "statsInboundDownlink": true,
+            "statsOutboundUplink": true,
+            "statsOutboundDownlink": true
+        }
+    },
+    "dns": {
+        "servers": [
+            "https://1.1.1.1/dns-query",
+            {
+                "address": "https://1.1.1.1/dns-query",
+                "domains": [
+                    "geosite:netflix"
+                ],
+                "skipFallback": true,
+                "queryStrategy": "UseIPv4"
+            },
+            {
+                "address": "https://1.1.1.1/dns-query",
+                "domains": [
+                    "geosite:openai"
+                ],
+                "skipFallback": true,
+                "queryStrategy": "UseIPv6"
+            }
+        ],
+        "queryStrategy": "UseIP"
+    },
+    "stats": {}
+}
