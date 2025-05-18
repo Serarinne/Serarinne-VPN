@@ -42,7 +42,7 @@ case $options in
 1) add-user;;
 2) delete-user;;
 3) extend-user;;
-4) check-user-config;;
+4) user-login;;
 5) user-bandwidth;;
 6) change-domain;;
 7) renew-cert;;
