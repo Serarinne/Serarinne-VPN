@@ -38,7 +38,11 @@ XRAY_DATA () {
 }
 
 USERS_DATA=$(XRAY_DATA $1)
-echo "USER@UPLOAD@DOWNLOAD ${USERS_DATA}" | tr ' ' '\n' | tr '@' ' ' | column -t
+TOTAL_UPLINK=$(xray api stats --server=$XRAY_PORT -name "inbound>>>${XRAY_TAG}>>>traffic>>>uplink" 2>/dev/null | jq '.stat.value')
+TOTAL_DOWNLINK=$(xray api stats --server=$XRAY_PORT -name "inbound>>>${XRAY_TAG}>>>traffic>>>downlink" 2>/dev/null | jq '.stat.value')
+TOTAL_DATA=$(echo "Total $TOTAL_UPLINK $TOTAL_DOWNLINK" | numfmt --field=2 --suffix=B --to=iec | numfmt --field=3 --suffix=B --to=iec | awk '{ gsub(" ", "@") ; print $0 }')
+
+echo "USER@UPLOAD@DOWNLOAD ${USERS_DATA} ${TOTAL_DATA}" | tr ' ' '\n' | tr '@' ' ' | column -t
 echo ""
 read -p "$(echo -e "Back")"
 menu
