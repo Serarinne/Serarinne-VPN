@@ -81,6 +81,7 @@ wget -O /usr/bin/restart-service "${SERVER_SCRIPT}/bash/restart-service.sh" && c
 wget -O /usr/bin/restore-server "${SERVER_SCRIPT}/bash/restore-server.sh" && chmod +x /usr/bin/restore-server
 wget -O /usr/bin/system-bandwidth "${SERVER_SCRIPT}/bash/system-bandwidth.sh" && chmod +x /usr/bin/system-bandwidth
 wget -O /usr/bin/user-bandwidth "${SERVER_SCRIPT}/bash/user-bandwidth.sh" && chmod +x /usr/bin/user-bandwidth
+wget -O /usr/bin/user-login "${SERVER_SCRIPT}/bash/user-login.sh" && chmod +x /usr/bin/user-login
 wget -O /usr/bin/menu "${SERVER_SCRIPT}/bash/menu.sh" && chmod +x /usr/bin/menu
 
 echo "0 2 * * * root auto-delete-expired-user" >> /etc/crontab
