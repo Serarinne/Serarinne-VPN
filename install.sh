@@ -23,7 +23,7 @@ echo -e "-----------------------------------------"
 echo -e "|           Instalasi Package           |"
 echo -e "-----------------------------------------"
 apt remove --purge ufw firewalld exim4 -y
-apt install git curl wget nano lsof fail2ban netfilter-persistent bzip2 gzip coreutils rsyslog iftop htop zip unzip net-tools sed screen gnupg gnupg1 gnupg2 bc apt-transport-https build-essential dirmngr libxml-parser-perl neofetch libsqlite3-dev socat python3 xz-utils dnsutils lsb-release cron bash-completion ntpdate chrony pwgen openssl netcat-traditional vnstat bsdmainutils -y
+apt install git curl wget nano lsof fail2ban netfilter-persistent bzip2 gzip coreutils rsyslog iftop htop zip unzip net-tools sed screen gnupg gnupg1 gnupg2 bc apt-transport-https build-essential dirmngr libxml-parser-perl neofetch libsqlite3-dev socat python3 xz-utils dnsutils lsb-release cron bash-completion ntpdate chrony pwgen openssl netcat-traditional vnstat bsdmainutils jq -y
 
 ntpdate pool.ntp.org
 timedatectl set-ntp true
