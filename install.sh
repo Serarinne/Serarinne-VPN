@@ -13,7 +13,7 @@ read -rp "Server Domain : " SERVER_DOMAIN
 mkdir /root/serarinne
 echo "" > /root/serarinne/name
 echo "" > /root/serarinne/domain
-echo "" >> /root/serarinne/ip
+echo "" > /root/serarinne/ip
 echo $SERVER_NAME > /root/serarinne/name
 echo $SERVER_DOMAIN > /root/serarinne/domain
 echo $SERVER_IP >> /root/serarinne/ip
