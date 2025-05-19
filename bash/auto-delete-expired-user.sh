@@ -10,7 +10,7 @@ do
     USER_EXPIRED=$(((EXPIRED_DATE - CURRENT_DATE) / 86400))
 
     if [[ "$USER_EXPIRED" -le "0" ]]; then
-        sed -i "/^# $USER_NAME $USER_DATE/,/^},{/d" /root/serarinne/xray/config.json
+        sed -i "/^# $USER_NAME $USER_DATE/,/^,{/d" /root/serarinne/xray/config.json
         systemctl restart xray.service
     fi
 done
