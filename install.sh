@@ -70,6 +70,7 @@ echo -e "-----------------------------------------"
 echo -e "|            Instalasi Addon            |"
 echo -e "-----------------------------------------"
 wget -O /usr/bin/add-user "${SERVER_SCRIPT}/bash/add-user.sh" && chmod +x /usr/bin/add-user
+wget -O /usr/bin/custom-user "${SERVER_SCRIPT}/bash/custom-user.sh" && chmod +x /usr/bin/custom-user
 wget -O /usr/bin/auto-delete-expired-user "${SERVER_SCRIPT}/bash/auto-delete-expired-user.sh" && chmod +x /usr/bin/auto-delete-expired-user
 wget -O /usr/bin/auto-delete-log "${SERVER_SCRIPT}/bash/auto-delete-log.sh" && chmod +x /usr/bin/auto-delete-log
 wget -O /usr/bin/backup-server "${SERVER_SCRIPT}/bash/backup-server.sh" && chmod +x /usr/bin/backup-server
